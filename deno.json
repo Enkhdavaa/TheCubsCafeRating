@@ -1,0 +1,18 @@
+{
+  "imports": {
+    "lit-html": "npm:lit-html@^3.2.1",
+    "vite": "npm:vite@^5.4.10"
+  },
+  "tasks": {
+    "dev": "deno run -A npm:vite",
+    "clean": "rm -rf ./node_modules && rm -rf ./vendor && rm -rf ./.vite && rm -rf ./deno.lock"
+  },
+  "nodeModulesDir": true,
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"],
+    "noImplicitOverride": true,
+    "strict": true,
+    "useUnknownInCatchVariables": true
+  },
+  "exclude": [".vite"]
+}

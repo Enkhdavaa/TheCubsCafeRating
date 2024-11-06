@@ -11,8 +11,8 @@ export default class Header extends HTMLElement {
   }
 
   #template(): HTMLTemplateResult {
-    return html`<div>
-      <span>Welcome to Cubs cafe rating</span>
+    return html`<div class="mb-10">
+      <h3>Welcome to Cubs cafe rating</h3>
     </div>`;
   }
 }

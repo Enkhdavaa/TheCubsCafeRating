@@ -1,2 +1,3 @@
 import "./header.ts";
-import "./userinput.ts";
+import "./footer.ts";
+import "./survey.ts";

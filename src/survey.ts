@@ -12,21 +12,43 @@ export default class Survey extends HTMLElement {
   }
 
   #template(): HTMLTemplateResult {
+    const rows = [
+      {
+        CafeName: "Smaakmakers",
+        Location: "Eindhoven",
+        CoffeeRating: 9,
+        TostiRating: 9,
+        VibeRating: 9,
+      },
+      {
+        CafeName: "ZwartWit",
+        Location: "VictoriaPark",
+        CoffeeRating: 9,
+        TostiRating: 9,
+        VibeRating: 9,
+      },
+    ];
     return html`<div class="container-fluid">
       <div class="row">
-        <div class="col-sm">Cafe name</div>
-        <div class="col-sm">Location</div>
-        <div class="col-sm">Coffee</div>
-        <div class="col-sm">Tosti</div>
-        <div class="col-sm">Vibe</div>
+        <div class="col-sm"><p class="h5">Cafe name</p></div>
+        <div class="col-sm"><p class="h5">Location</p></div>
+        <div class="col-sm"><p class="h5">Coffee rating</p></div>
+        <div class="col-sm"><p class="h5">Tosti rating</p></div>
+        <div class="col-sm"><p class="h5">Vibe rating</p></div>
+        <div class="col-sm"><p class="h5">Action</p></div>
       </div>
-      <div class="row">
-        <div class="col-sm">${ratingUserInput()}</div>
-        <div class="col-sm">${ratingUserInput()}</div>
-        <div class="col-sm">${ratingUserInput()}</div>
-        <div class="col-sm">${ratingUserInput()}</div>
-        <div class="col-sm">${ratingUserInput()}</div>
-      </div>
+      ${rows.map((row) => {
+        return html`
+          <div class="row mb-3">
+            <div class="col-sm">${row.CafeName}</div>
+            <div class="col-sm">${row.Location}</div>
+            <div class="col-sm">${row.CoffeeRating}</div>
+            <div class="col-sm">${row.TostiRating}</div>
+            <div class="col-sm">${row.VibeRating}</div>
+            <div class="col-sm">${ratingUserInput()}</div>
+          </div>
+        `;
+      })}
     </div>`;
   }
 }

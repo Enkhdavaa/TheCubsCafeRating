@@ -30,22 +30,29 @@ export default class Survey extends HTMLElement {
     ];
     return html`<div class="container-fluid">
       <div class="row">
-        <div class="col-sm"><p class="h5">Cafe name</p></div>
-        <div class="col-sm"><p class="h5">Location</p></div>
-        <div class="col-sm"><p class="h5">Coffee rating</p></div>
-        <div class="col-sm"><p class="h5">Tosti rating</p></div>
-        <div class="col-sm"><p class="h5">Vibe rating</p></div>
-        <div class="col-sm"><p class="h5">Action</p></div>
+        <div class="col-2 col-sm"><p class="h6">Cafe name</p></div>
+        <div class="col-2 col-sm"><p class="h6">Location</p></div>
+        <div class="col-2 col-sm"><p class="h6">Coffee rating</p></div>
+        <div class="col-2 col-sm"><p class="h6">Tosti rating</p></div>
+        <div class="col-2 col-sm"><p class="h6">Vibe rating</p></div>
       </div>
       ${rows.map((row) => {
         return html`
           <div class="row mb-3">
-            <div class="col-sm">${row.CafeName}</div>
-            <div class="col-sm">${row.Location}</div>
-            <div class="col-sm">${row.CoffeeRating}</div>
-            <div class="col-sm">${row.TostiRating}</div>
-            <div class="col-sm">${row.VibeRating}</div>
-            <div class="col-sm">${ratingUserInput()}</div>
+            <div class="col-2 col-sm"><span>${row.CafeName}</span></div>
+            <div class="col-2 col-sm"><span>${row.Location}</span></div>
+            <div class="col-2 col-sm">
+              <span>${row.CoffeeRating}</span>
+              ${ratingUserInput(row.CafeName, "Coffee")}
+            </div>
+            <div class="col-2 col-sm">
+              <span>${row.TostiRating}</span>
+              ${ratingUserInput(row.CafeName, "Tosti")}
+            </div>
+            <div class="col-2 col-sm">
+              <span>${row.VibeRating}</span>
+              ${ratingUserInput(row.CafeName, "Vibe")}
+            </div>
           </div>
         `;
       })}

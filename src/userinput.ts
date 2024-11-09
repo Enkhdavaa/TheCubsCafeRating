@@ -1,19 +1,23 @@
 import { html, type HTMLTemplateResult } from "lit-html";
 
-export function ratingUserInput(): HTMLTemplateResult {
+export function ratingUserInput(
+  cafe: string,
+  product: string
+): HTMLTemplateResult {
+  const uniqueId = cafe + "-" + product;
   return html`
     <button
       type="button"
       class="btn btn-primary"
       data-bs-toggle="modal"
-      data-bs-target="#ratingUserInput"
+      data-bs-target=${"#" + uniqueId}
     >
       Rate
     </button>
 
     <div
       class="modal fade"
-      id="ratingUserInput"
+      id=${uniqueId}
       tabindex="-1"
       area-labelledby="ratingUserInputLabel"
       area-hidden="true"
@@ -23,14 +27,14 @@ export function ratingUserInput(): HTMLTemplateResult {
           <div class="modal-header">
             <h5>Here is the text</h5>
           </div>
-          ${getModalFormHtml()}
+          ${getModalFormHtml(uniqueId)}
         </div>
       </div>
     </div>
   `;
 }
 
-function getModalFormHtml(): HTMLTemplateResult {
+function getModalFormHtml(product: string): HTMLTemplateResult {
   return html`
     <form>
       <div class="m-3">
@@ -45,10 +49,7 @@ function getModalFormHtml(): HTMLTemplateResult {
           Name is only used for filtering duplicate votes!
         </div>
       </div>
-      <div class="m-3">
-        ${labelAndInputNumber("Coffee")} ${labelAndInputNumber("Tosti")}
-        ${labelAndInputNumber("Vibe")}
-      </div>
+      <div class="m-3">${labelAndInputNumberHtml(product + " Rate")}</div>
       <div class="m-3">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
@@ -56,7 +57,7 @@ function getModalFormHtml(): HTMLTemplateResult {
   `;
 }
 
-function labelAndInputNumber(labelNameAndId: string): HTMLTemplateResult {
+function labelAndInputNumberHtml(labelNameAndId: string): HTMLTemplateResult {
   return html`
     <div class="mb-2">
       <label for="${labelNameAndId}" class="form-label"

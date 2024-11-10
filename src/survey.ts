@@ -28,34 +28,32 @@ export default class Survey extends HTMLElement {
         VibeRating: 9,
       },
     ];
-    return html`<div class="container-fluid">
-      <div class="row">
-        <div class="col-2 col-sm"><p class="h6">Cafe name</p></div>
-        <div class="col-2 col-sm"><p class="h6">Location</p></div>
-        <div class="col-2 col-sm"><p class="h6">Coffee rating</p></div>
-        <div class="col-2 col-sm"><p class="h6">Tosti rating</p></div>
-        <div class="col-2 col-sm"><p class="h6">Vibe rating</p></div>
-      </div>
-      ${rows.map((row) => {
-        return html`
-          <div class="row mb-3">
-            <div class="col-2 col-sm"><span>${row.CafeName}</span></div>
-            <div class="col-2 col-sm"><span>${row.Location}</span></div>
-            <div class="col-2 col-sm">
-              <span>${row.CoffeeRating}</span>
-              ${ratingUserInput(row.CafeName, "Coffee")}
-            </div>
-            <div class="col-2 col-sm">
-              <span>${row.TostiRating}</span>
-              ${ratingUserInput(row.CafeName, "Tosti")}
-            </div>
-            <div class="col-2 col-sm">
-              <span>${row.VibeRating}</span>
-              ${ratingUserInput(row.CafeName, "Vibe")}
-            </div>
-          </div>
-        `;
-      })}
+    return html` <div class="border border-primary rounded m-3">
+      <p class="h3 ">Rate cafes</p>
+      <table class="table">
+        <thead class="thread-dark">
+          <tr>
+            <th scope="col">Cafe name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Coffee rating</th>
+            <th scope="col">Tosti rating</th>
+            <th scope="col">Vibe rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map((row) => {
+            return html`
+              <tr>
+                <td>${row.CafeName}</td>
+                <td>${row.Location}</td>
+                <td>${ratingUserInput(row.CafeName, "Coffee")}</td>
+                <td>${ratingUserInput(row.CafeName, "Tosti")}</td>
+                <td>${ratingUserInput(row.CafeName, "Vibe")}</td>
+              </tr>
+            `;
+          })}
+        </tbody>
+      </table>
     </div>`;
   }
 }

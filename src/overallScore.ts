@@ -11,7 +11,7 @@ export default class OverallScore extends HTMLElement {
   }
 
   #template(): HTMLTemplateResult {
-    return html`<div class="border border-primary rounded m-3">
+    return html`<div class="border border-primary rounded m-3 table-responsive">
       <p class="h3 ">Score</p>
       <table class="table">
         <thead class="thread-dark">

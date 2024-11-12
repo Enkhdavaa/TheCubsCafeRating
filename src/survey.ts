@@ -28,7 +28,9 @@ export default class Survey extends HTMLElement {
         VibeRating: 9,
       },
     ];
-    return html` <div class="border border-primary rounded m-3">
+    return html` <div
+      class="border border-primary rounded m-3 table-responsive"
+    >
       <p class="h3 ">Rate cafes</p>
       <table class="table">
         <thead class="thread-dark">

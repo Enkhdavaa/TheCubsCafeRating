@@ -1,6 +1,5 @@
 import { Application, Router } from "@oak/oak";
-import { cors } from "https://deno.land/x/nhttp@2.0.2/lib/cors.ts";
-import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 import { baseUrl } from "../api/endpoints.ts";
 
 const router = new Router();

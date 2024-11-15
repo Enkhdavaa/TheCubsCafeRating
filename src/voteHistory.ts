@@ -1,4 +1,5 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
+import { GetRates } from "./api/getRates.ts";
 
 export default class VoteHostory extends HTMLElement {
   constructor() {
@@ -11,6 +12,8 @@ export default class VoteHostory extends HTMLElement {
   }
 
   #template(): HTMLTemplateResult {
+    const history = GetRates("", "", "", 1);
+    console.log(history);
     return html`<div class="border border-primary rounded m-3 table-responsive">
       <p class="h3 ">Vote history</p>
       <table class="table">

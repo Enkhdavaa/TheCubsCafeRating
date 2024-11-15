@@ -1,3 +1,2 @@
-1. Tables are too wide and requires swiping to see the end.
-2. Create back-end and make a database to store votes.
-3. How to make a proper footer that is stuck to the bottom of the page? Scrolling also should be allowed.
+1. Create back-end and make a database to store votes.
+2. How to make a proper footer that is stuck to the bottom of the page? Scrolling also should be allowed.

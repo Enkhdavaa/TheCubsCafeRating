@@ -38,8 +38,8 @@ router.post("/rateCafeProduct", async (ctx) => {
   try {
     const ratedData = (await ctx.request.body.json()) as CafeProductRating;
     if (
-      ratedData.cafe != "" ||
-      ratedData.product != "" ||
+      ratedData.cafe === "" ||
+      ratedData.product === "" ||
       ratedData.score == 0
     ) {
       throw new Error("Rating data is insufficient. Please check" + ratedData);

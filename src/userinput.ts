@@ -43,7 +43,7 @@ function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
         <input
           type="text"
           class="form-control"
-          id="UserInput"
+          id="UserNameInput"
           aria-describedby="UserInputHelp"
         />
         <div id="UserInputHelp" class="form-text">
@@ -56,7 +56,23 @@ function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
           type="submit"
           class="btn btn-primary"
           @click="${async () => {
-            await RateCafeProduct("Anonym", cafe, product, 1);
+            const inputUserName: HTMLInputElement = document.getElementById(
+              "UserNameInput"
+            ) as HTMLInputElement;
+
+            const inputScore: HTMLInputElement = document.getElementById(
+              cafe + product
+            ) as HTMLInputElement;
+
+            const userName = inputUserName.value;
+            const score = inputScore.value;
+
+            await RateCafeProduct(
+              userName,
+              cafe,
+              product,
+              Number.parseInt(score)
+            );
           }}"
         >
           Submit

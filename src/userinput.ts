@@ -55,9 +55,9 @@ function getModalFormHtml(product: string): HTMLTemplateResult {
         <button
           type="submit"
           class="btn btn-primary"
-          @click="${() => {
+          @click="${async () => {
             console.log("here it clicks");
-            RateCafeProduct("", "", "", 1);
+            await RateCafeProduct("asd", "asd", "asd", 1);
           }}"
         >
           Submit

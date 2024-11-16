@@ -1,4 +1,4 @@
-import { Router, RouterContext } from "@oak/oak";
+import { Router } from "@oak/oak";
 import { CafeProductRating, TopCafe, UserRate } from "../api/interface.ts";
 
 export const router = new Router();
@@ -34,13 +34,19 @@ router.post("/rateCafeProduct", async (ctx) => {
   if (!ctx.request.hasBody) {
     throw new Error("There is no data specified");
   }
-  const ratedData = (await ctx.request.body.json()) as CafeProductRating;
 
-  if (ratedData.cafe != "" || ratedData.product != "" || ratedData.score == 0) {
-    throw new Error("Rating data is insufficient. Please check" + ratedData);
+  try {
+    const ratedData = (await ctx.request.body.json()) as CafeProductRating;
+    if (
+      ratedData.cafe != "" ||
+      ratedData.product != "" ||
+      ratedData.score == 0
+    ) {
+      throw new Error("Rating data is insufficient. Please check" + ratedData);
+    }
+    console.log(ratedData);
+    ctx.response.body = { test: 24 };
+  } catch (err) {
+    throw err;
   }
-
-  console.log(ratedData);
-  console.log("Server says good here");
-  ctx.response.body = { test: 24 };
 });

@@ -26,16 +26,16 @@ export function ratingUserInput(
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5>Here is the text</h5>
+            <h5>Fill to rate the cafe</h5>
           </div>
-          ${getModalFormHtml(uniqueId)}
+          ${getModalFormHtml(cafe, product)}
         </div>
       </div>
     </div>
   `;
 }
 
-function getModalFormHtml(product: string): HTMLTemplateResult {
+function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
   return html`
     <form>
       <div class="m-3">
@@ -50,14 +50,13 @@ function getModalFormHtml(product: string): HTMLTemplateResult {
           Name is only used for filtering duplicate votes!
         </div>
       </div>
-      <div class="m-3">${labelAndInputNumberHtml(product + " Rate")}</div>
+      <div class="m-3">${labelAndInputNumberHtml(cafe, product)}</div>
       <div class="m-3">
         <button
           type="submit"
           class="btn btn-primary"
           @click="${async () => {
-            console.log("here it clicks");
-            await RateCafeProduct("asd", "asd", "asd", 1);
+            await RateCafeProduct("Anonym", cafe, product, 1);
           }}"
         >
           Submit
@@ -67,16 +66,19 @@ function getModalFormHtml(product: string): HTMLTemplateResult {
   `;
 }
 
-function labelAndInputNumberHtml(labelNameAndId: string): HTMLTemplateResult {
+function labelAndInputNumberHtml(
+  cafe: string,
+  product: string
+): HTMLTemplateResult {
   return html`
     <div class="mb-2">
-      <label for="${labelNameAndId}" class="form-label"
-        >${labelNameAndId}</label
+      <label for="${cafe + product}" class="form-label"
+        >Rating ${product} from ${cafe}</label
       >
       <input
         type="number"
         class="form-control"
-        id="${labelNameAndId}"
+        id="${cafe + product}"
         aria-describedby="UserRatingHelp"
         min="1"
         max="10"

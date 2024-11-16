@@ -36,7 +36,6 @@ export default class Survey extends HTMLElement {
         <thead class="thread-dark">
           <tr>
             <th scope="col">Cafe name</th>
-            <th scope="col">Location</th>
             <th scope="col">Coffee rating</th>
             <th scope="col">Tosti rating</th>
             <th scope="col">Vibe rating</th>
@@ -47,7 +46,6 @@ export default class Survey extends HTMLElement {
             return html`
               <tr>
                 <td>${row.CafeName}</td>
-                <td>${row.Location}</td>
                 <td>${ratingUserInput(row.CafeName, "Coffee")}</td>
                 <td>${ratingUserInput(row.CafeName, "Tosti")}</td>
                 <td>${ratingUserInput(row.CafeName, "Vibe")}</td>

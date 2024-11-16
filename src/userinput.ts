@@ -1,4 +1,5 @@
 import { html, type HTMLTemplateResult } from "lit-html";
+import { RateCafeProduct } from "./api/rateCafeProduct.ts";
 
 export function ratingUserInput(
   cafe: string,
@@ -51,7 +52,16 @@ function getModalFormHtml(product: string): HTMLTemplateResult {
       </div>
       <div class="m-3">${labelAndInputNumberHtml(product + " Rate")}</div>
       <div class="m-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          @click="${() => {
+            console.log("here it clicks");
+            RateCafeProduct("", "", "", 1);
+          }}"
+        >
+          Submit
+        </button>
       </div>
     </form>
   `;

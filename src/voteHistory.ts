@@ -1,5 +1,6 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
-import { GetRates } from "./api/getRates.ts";
+import { apiGetLast30Rates } from "./api/getRates.ts";
+import { UserRate } from "./api/interface.ts";
 
 export default class VoteHostory extends HTMLElement {
   constructor() {
@@ -8,18 +9,23 @@ export default class VoteHostory extends HTMLElement {
   }
 
   #update() {
-    render(this.#template(), this);
+    apiGetLast30Rates()
+      .then((res) => {
+        render(this.#template(res ?? []), this);
+      })
+      .catch((err) => {
+        console.error(err);
+        render(this.#template([]), this);
+      });
   }
 
-  #template(): HTMLTemplateResult {
-    const history = GetRates("", "", "", 1);
-    console.log(history);
+  #template(userRates: UserRate[]): HTMLTemplateResult {
     return html`<div class="border border-primary rounded m-3 table-responsive">
       <p class="h3 ">Vote history</p>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Time</th>
+            <th scope="col">User</th>
             <th scope="col">Cafe</th>
             <th scope="col">Product</th>
             <th scope="col">Rating (1-10)</th>
@@ -27,10 +33,12 @@ export default class VoteHostory extends HTMLElement {
         </thead>
         <tbody>
           <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
+            ${userRates.map((rate) => {
+              return html`<td>${rate.user}</td>
+                <td>${rate.cafe}</td>
+                <td>${rate.product}</td>
+                <td>${rate.score}</td>`;
+            })}
           </tr>
         </tbody>
       </table>

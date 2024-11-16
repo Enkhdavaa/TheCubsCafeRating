@@ -1,12 +1,10 @@
-import { baseUrlHostPort, getRatesEndpoint } from "./endpoints.ts";
+import { baseUrlHostPort } from "./endpoints.ts";
+import { UserRate } from "./interface.ts";
 
-export async function GetRates(
-  user: string,
-  place: string,
-  product: string,
-  score: number
-) {
-  const response = await fetch(new URL(getRatesEndpoint, baseUrlHostPort));
-  const config = await response.json();
-  console.log(config);
+export async function apiGetLast30Rates(): Promise<UserRate[]> {
+  const response = await fetch(new URL("/getRates", baseUrlHostPort));
+  const result = await response.json();
+
+  const userRate: UserRate[] = result.userRates;
+  return userRate;
 }

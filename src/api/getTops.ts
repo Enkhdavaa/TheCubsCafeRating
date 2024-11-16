@@ -1,12 +1,10 @@
-import { baseUrlHostPort, getTopsEndpoint } from "./endpoints.ts";
+import { baseUrlHostPort } from "./endpoints.ts";
+import { TopCafe } from "./interface.ts";
 
-export async function GetTops(
-  user: string,
-  place: string,
-  product: string,
-  score: number
-) {
-  const response = await fetch(new URL(getTopsEndpoint, baseUrlHostPort));
-  const config = await response.json();
-  console.log(config);
+export async function apiGet5TopCafes(): Promise<TopCafe[]> {
+  const response = await fetch(new URL("/getTops", baseUrlHostPort));
+  const result = await response.json();
+
+  const topCafes: TopCafe[] = result.topCafes;
+  return topCafes;
 }

@@ -1,23 +1,7 @@
 import { Application, Router } from "@oak/oak";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 import { baseUrl } from "../api/endpoints.ts";
-
-const router = new Router();
-
-router.get("/getRates", (ctx) => {
-  console.log(ctx.request.body);
-  ctx.response.body = { test: 23 };
-});
-
-router.get("/getTops", (ctx) => {
-  console.log(ctx.request.body);
-  ctx.response.body = "getTops";
-});
-
-router.post("/rateCafeProduct", (ctx) => {
-  console.log(ctx.request.body);
-  ctx.response.body = "rateCafeProduct";
-});
+import { router } from "./router.ts";
 
 const app = new Application();
 app.use(

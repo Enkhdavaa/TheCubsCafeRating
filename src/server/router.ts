@@ -1,5 +1,6 @@
 import { Router } from "@oak/oak";
 import { CafeProductRating, TopCafe, UserRate } from "../api/interface.ts";
+import { AddReview } from "../db/dbAccess.ts";
 
 export const router = new Router();
 
@@ -45,8 +46,17 @@ router.post("/rateCafeProduct", async (ctx) => {
       throw new Error("Rating data is insufficient. Please check" + ratedData);
     }
     console.log(ratedData);
-    ctx.response.body = { test: 24 };
+
+    AddReview(
+      ratedData.user,
+      ratedData.cafe,
+      ratedData.product,
+      ratedData.score
+    );
+
+    ctx.response.body = { Result: "Success" };
   } catch (err) {
+    ctx.response.body = { Result: "Failed" };
     throw err;
   }
 });

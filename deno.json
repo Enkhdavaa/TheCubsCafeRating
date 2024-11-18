@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@db/sqlite": "jsr:@db/sqlite@^0.12.0",
     "@oak/oak": "jsr:@oak/oak@^17.1.3",
     "lit-html": "npm:lit-html@^3.2.1",
     "vite": "npm:vite@^5.4.10"
@@ -7,7 +8,7 @@
   "tasks": {
     "dev": "deno run -A npm:vite",
     "clean": "rm -rf ./node_modules && rm -rf ./vendor && rm -rf ./.vite && rm -rf ./deno.lock",
-    "serve": "deno run --allow-net ./src/server/server.ts"
+    "serve": "deno run --allow-all ./src/server/server.ts"
   },
   "nodeModulesDir": "auto",
   "compilerOptions": {

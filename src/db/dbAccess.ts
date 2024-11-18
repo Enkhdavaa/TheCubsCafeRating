@@ -49,14 +49,11 @@ export function GetLastReviews(count: number) {
     )
     .all(count);
 
-  for (const row of rows) {
-    console.log(row);
-  }
-
   db.close();
+  return rows;
 }
 
-export function GetBest(product: string, count: number) {
+export function GetTopProducts(product: string, count: number) {
   if (product != "Coffee" && product != "Tosti" && product != "Vibe") {
     console.error("Product is NOT VALID");
     return;
@@ -68,17 +65,15 @@ export function GetBest(product: string, count: number) {
   }
 
   const db = new Database(db_path);
+
   const rows = db
     .prepare(
       `
-      SELECT Cafe, Product, Score FROM CafeReview WHERE Product = ? LIMIT = ?
+      SELECT Cafe, Product, Score FROM CafeReview WHERE Product = ? LIMIT ?
       `
     )
     .all(product, count);
 
-  for (const row of rows) {
-    console.log(row);
-  }
-
   db.close();
+  return rows;
 }

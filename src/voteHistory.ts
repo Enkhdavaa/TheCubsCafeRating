@@ -1,5 +1,5 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
-import { apiGetLast30Rates } from "./api/getRates.ts";
+import { apiGetLastReviews } from "./api/getRates.ts";
 import { UserRate } from "./api/interface.ts";
 
 export default class VoteHostory extends HTMLElement {
@@ -9,7 +9,7 @@ export default class VoteHostory extends HTMLElement {
   }
 
   #update() {
-    apiGetLast30Rates()
+    apiGetLastReviews()
       .then((res) => {
         render(this.#template(res ?? []), this);
       })
@@ -32,14 +32,16 @@ export default class VoteHostory extends HTMLElement {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            ${userRates.map((rate) => {
-              return html`<td>${rate.user}</td>
+          ${userRates.map((rate) => {
+            return html`
+              <tr>
+                <td>${rate.user}</td>
                 <td>${rate.cafe}</td>
                 <td>${rate.product}</td>
-                <td>${rate.score}</td>`;
-            })}
-          </tr>
+                <td>${rate.score}</td>
+              </tr>
+            `;
+          })}
         </tbody>
       </table>
     </div>`;

@@ -10,7 +10,6 @@ export interface TopCafe {
   coffeeRating: number;
   tostiRating: number;
   vibeRating: number;
-  overallScore: number;
 }
 export interface CafeProductRating {
   user: string;

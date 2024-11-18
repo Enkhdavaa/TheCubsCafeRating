@@ -1,34 +1,19 @@
 import { Router } from "@oak/oak";
-import { CafeProductRating, TopCafe, UserRate } from "../api/interface.ts";
-import { AddReview } from "../db/dbAccess.ts";
+import { CafeProductRating } from "../api/interface.ts";
+import { AddReview, GetLastReviews, GetTopProducts } from "../db/dbAccess.ts";
 
 export const router = new Router();
 
 router.get("/getRates", (ctx) => {
-  const userRates: UserRate[] = [
-    {
-      user: "Dave",
-      cafe: "Smaakmakers",
-      product: "Tosti",
-      score: 10,
-    },
-  ];
+  const userReviews = GetLastReviews(3);
 
-  ctx.response.body = { userRates: userRates };
+  ctx.response.body = { userRates: userReviews };
 });
 
-router.get("/getTops", (ctx) => {
-  const topCafes: TopCafe[] = [
-    {
-      cafe: "Smaakmakers",
-      coffeeRating: 10,
-      tostiRating: 10,
-      vibeRating: 10,
-      overallScore: 10,
-    },
-  ];
+router.get("/getTopCoffees", (ctx) => {
+  const topCoffees = GetTopProducts("Coffee", 1);
 
-  ctx.response.body = { topCafes: topCafes };
+  ctx.response.body = { topCoffees: topCoffees };
 });
 
 router.post("/rateCafeProduct", async (ctx) => {

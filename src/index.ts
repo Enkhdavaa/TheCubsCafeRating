@@ -3,4 +3,4 @@ import "./footer.ts";
 import "./survey.ts";
 import "./userinput.ts";
 import "./voteHistory.ts";
-import "./overallScore.ts";
+import "./topCoffee.ts";

@@ -1,15 +1,15 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
-import { apiGet5TopCafes } from "./api/getTops.ts";
+import { apiGetTopCoffees } from "./api/getTopCoffees.ts";
 import { TopCafe } from "./api/interface.ts";
 
-export default class OverallScore extends HTMLElement {
+export default class BestCoffee extends HTMLElement {
   constructor() {
     super();
     this.#update();
   }
 
   #update() {
-    apiGet5TopCafes()
+    apiGetTopCoffees()
       .then((res) => {
         render(this.#template(res ?? []), this);
       })
@@ -19,9 +19,9 @@ export default class OverallScore extends HTMLElement {
       });
   }
 
-  #template(topCafes: TopCafe[]): HTMLTemplateResult {
+  #template(topCoffees: TopCafe[]): HTMLTemplateResult {
     return html`<div class="border border-primary rounded m-3 table-responsive">
-      <p class="h3 ">Score</p>
+      <p class="h3 ">Top coffee</p>
       <table class="table">
         <thead class="thread-dark">
           <tr>
@@ -29,25 +29,23 @@ export default class OverallScore extends HTMLElement {
             <th scope="col">Coffee rating</th>
             <th scope="col">Tosti rating</th>
             <th scope="col">Vibe rating</th>
-            <th scope="col">Overall</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            ${topCafes.map((cafe) => {
-              return html`
+          ${topCoffees.map((cafe) => {
+            return html`
+              <tr>
                 <td>${cafe.cafe}</td>
                 <td>${cafe.coffeeRating}</td>
                 <td>${cafe.tostiRating}</td>
                 <td>${cafe.vibeRating}</td>
-                <td>${cafe.overallScore}</td>
-              `;
-            })}
-          </tr>
+              </tr>
+            `;
+          })}
         </tbody>
       </table>
     </div>`;
   }
 }
 
-customElements.define("overall-score", OverallScore);
+customElements.define("top-coffee", BestCoffee);

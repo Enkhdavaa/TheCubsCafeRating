@@ -1,7 +1,7 @@
 import { html, type HTMLTemplateResult } from "lit-html";
 import { RateCafeProduct } from "./api/rateCafeProduct.ts";
 
-export function ratingUserInput(
+export function triggerBtnForModalHtml(
   cafe: string,
   product: string
 ): HTMLTemplateResult {
@@ -36,72 +36,67 @@ export function ratingUserInput(
 }
 
 function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
+  const userNameInputId = "userName" + cafe + product;
+  const scoreInputId = "score" + cafe + product;
+
   return html`
     <form>
       <div class="m-3">
-        <label for="Name" class="form-label">Name</label>
+        <label for="${userNameInputId}" class="form-label">Name</label>
         <input
           type="text"
           class="form-control"
-          id="UserNameInput"
-          aria-describedby="UserInputHelp"
+          id="${userNameInputId}"
+          minlength="2"
+          required
+          aria-describedby="${userNameInputId}"
         />
-        <div id="UserInputHelp" class="form-text">
+        <div id="${userNameInputId}" class="form-text mb-2">
           Name is only used for filtering duplicate votes!
         </div>
-      </div>
-      <div class="m-3">${labelAndInputNumberHtml(cafe, product)}</div>
-      <div class="m-3">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          @click="${async () => {
-            const inputUserName: HTMLInputElement = document.getElementById(
-              "UserNameInput"
-            ) as HTMLInputElement;
 
-            const inputScore: HTMLInputElement = document.getElementById(
-              cafe + product
-            ) as HTMLInputElement;
-
-            const userName = inputUserName.value;
-            const score = inputScore.value;
-
-            await RateCafeProduct(
-              userName,
-              cafe,
-              product,
-              Number.parseInt(score)
-            );
-          }}"
+        <label for="${scoreInputId}" class="form-label mb-2"
+          >Rating ${product} from ${cafe}</label
         >
-          Submit
-        </button>
+        <input
+          type="number"
+          class="form-control"
+          id="${scoreInputId}"
+          aria-describedby="${scoreInputId}"
+          min="1"
+          max="10"
+          required
+        />
+        <div id="${scoreInputId}" class="form-text">
+          Only allowed 1-10 in rating.
+        </div>
       </div>
-    </form>
-  `;
-}
 
-function labelAndInputNumberHtml(
-  cafe: string,
-  product: string
-): HTMLTemplateResult {
-  return html`
-    <div class="mb-2">
-      <label for="${cafe + product}" class="form-label"
-        >Rating ${product} from ${cafe}</label
+      <button
+        type="submit"
+        class="btn btn-primary mx-3 mb-3"
+        @click="${async () => {
+          const inputUserName: HTMLInputElement = document.getElementById(
+            userNameInputId
+          ) as HTMLInputElement;
+
+          const inputScore: HTMLInputElement = document.getElementById(
+            scoreInputId
+          ) as HTMLInputElement;
+
+          const userName = inputUserName.value;
+          const score = Number.parseInt(inputScore.value);
+
+          if (score > 0 && score < 11) {
+            await RateCafeProduct(userName, cafe, product, score);
+            globalThis.alert(
+              "We are going to see which cafe has the best product for Cubs. Thank you so much!"
+            );
+          }
+        }}"
       >
-      <input
-        type="number"
-        class="form-control"
-        id="${cafe + product}"
-        aria-describedby="UserRatingHelp"
-        min="1"
-        max="10"
-      />
-      <div id="UserRatingHelp" class="form-text">
-        Only allowed 1-10 in rating.
-      </div>
-    </div>
+        Submit
+      </button>
+    </form>
   `;
 }

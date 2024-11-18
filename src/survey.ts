@@ -1,5 +1,5 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
-import { ratingUserInput } from "./userinput.ts";
+import { triggerBtnForModalHtml } from "./userinput.ts";
 
 export default class Survey extends HTMLElement {
   constructor() {
@@ -46,9 +46,9 @@ export default class Survey extends HTMLElement {
             return html`
               <tr>
                 <td>${row.CafeName}</td>
-                <td>${ratingUserInput(row.CafeName, "Coffee")}</td>
-                <td>${ratingUserInput(row.CafeName, "Tosti")}</td>
-                <td>${ratingUserInput(row.CafeName, "Vibe")}</td>
+                <td>${triggerBtnForModalHtml(row.CafeName, "Coffee")}</td>
+                <td>${triggerBtnForModalHtml(row.CafeName, "Tosti")}</td>
+                <td>${triggerBtnForModalHtml(row.CafeName, "Vibe")}</td>
               </tr>
             `;
           })}

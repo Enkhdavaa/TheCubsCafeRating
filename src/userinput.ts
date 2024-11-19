@@ -5,7 +5,7 @@ export function triggerBtnForModalHtml(
   cafe: string,
   product: string
 ): HTMLTemplateResult {
-  const uniqueId = (cafe + "-" + product).replace(" ", "-");
+  const uniqueId = (cafe + "-" + product).replace(/\s+/g, "-");
   return html`
     <button
       type="button"

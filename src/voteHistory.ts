@@ -1,6 +1,6 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
-import { apiGetLastReviews } from "./api/getRates.ts";
-import { UserRate } from "./api/interface.ts";
+import { apiGetLastReviews } from "./api/getReviews.ts";
+import { Review } from "./db/interface.ts";
 
 export default class VoteHostory extends HTMLElement {
   constructor() {
@@ -19,7 +19,7 @@ export default class VoteHostory extends HTMLElement {
       });
   }
 
-  #template(userRates: UserRate[]): HTMLTemplateResult {
+  #template(userRates: Review[]): HTMLTemplateResult {
     return html`<div class="border border-primary rounded m-3 table-responsive">
       <p class="h3 ">Vote history</p>
       <table class="table">

@@ -1,5 +1,5 @@
+import { ReviewRequest } from "../db/interface.ts";
 import { baseUrlHostPort } from "./endpoints.ts";
-import { CafeProductRating } from "./interface.ts";
 
 export async function RateCafeProduct(
   user: string,
@@ -7,7 +7,7 @@ export async function RateCafeProduct(
   product: string,
   score: number
 ) {
-  const rating: CafeProductRating = {
+  const rating: ReviewRequest = {
     user: user,
     cafe: cafe,
     product: product,
@@ -15,15 +15,14 @@ export async function RateCafeProduct(
   };
 
   try {
-    const response = await fetch(new URL("/rateCafeProduct", baseUrlHostPort), {
+    const response = await fetch(new URL("/addReview", baseUrlHostPort), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(rating),
     });
-    const result = await response.json();
-    console.log(result);
+    await response.json();
   } catch (err) {
     console.error(err);
   }

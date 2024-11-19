@@ -1,5 +1,5 @@
 import { html, type HTMLTemplateResult } from "lit-html";
-import { RateCafeProduct } from "./api/rateCafeProduct.ts";
+import { RateCafeProduct } from "./api/addReview.ts";
 
 export function triggerBtnForModalHtml(
   cafe: string,

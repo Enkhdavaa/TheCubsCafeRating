@@ -1,13 +1,14 @@
 import { Database } from "@db/sqlite";
+import { AvarageScore, Review, ReviewRequest } from "./interface.ts";
 
 const db_path = "./src/db/cafeRatings.db";
 
-export function AddReview(
-  user: string,
-  cafe: string,
-  product: string,
-  score: number
-) {
+export function AddReview(request: ReviewRequest) {
+  const user = request.user;
+  const cafe = request.cafe;
+  const product = request.product;
+  const score = request.score;
+
   if (user == "" || cafe == "") {
     console.error("Input data is WRONG. User: " + user + " Cafe: " + cafe);
     return;
@@ -34,34 +35,48 @@ export function AddReview(
   db.close();
 }
 
-export function GetLastReviews(count: number) {
-  if (count == 0) {
-    console.error("Count should NOT BE 0");
-    return;
+export function GetLastReviews(limit: number): Review[] {
+  if (limit == 0) {
+    console.error("Limit should NOT BE 0");
+    return [];
   }
 
   const db = new Database(db_path);
   const rows = db
     .prepare(
       `
-      SELECT Cafe, Product, Score FROM CafeReview ORDER BY Id DESC LIMIT ?
+      SELECT User, Cafe, Product, Score 
+      FROM CafeReview 
+      ORDER BY Id DESC 
+      LIMIT ?
       `
     )
-    .all(count);
+    .all(limit);
 
   db.close();
-  return rows;
+
+  const reviews: Review[] = rows.map((row: any) => ({
+    user: row.User,
+    cafe: row.Cafe,
+    product: row.Product,
+    score: Number.parseInt(row.Score),
+  }));
+
+  return reviews;
 }
 
-export function GetTopProducts(product: string, count: number) {
+export function GetAvgScoresByCafe(
+  product: string,
+  limit: number
+): AvarageScore[] {
   if (product != "Coffee" && product != "Tosti" && product != "Vibe") {
     console.error("Product is NOT VALID");
-    return;
+    return [];
   }
 
-  if (count == 0) {
-    console.error("Count should NOT BE 0");
-    return;
+  if (limit == 0) {
+    console.error("Limit should NOT BE 0");
+    return [];
   }
 
   const db = new Database(db_path);
@@ -69,11 +84,24 @@ export function GetTopProducts(product: string, count: number) {
   const rows = db
     .prepare(
       `
-      SELECT Cafe, Product, Score FROM CafeReview WHERE Product = ? LIMIT ?
+      SELECT Cafe, AVG(Score) AS AvarageScore, COUNT(*) AS ReviewCount
+      FROM CafeReview
+      WHERE Product = ?
+      GROUP BY Cafe
+      ORDER BY AvarageScore DESC
+      LIMIT ?
       `
     )
-    .all(product, count);
+    .all(product, limit);
 
   db.close();
-  return rows;
+
+  const scores: AvarageScore[] = rows.map((row: any) => ({
+    cafe: row.Cafe,
+    product: product,
+    score: Number.parseInt(row.AvarageScore),
+    count: Number.parseInt(row.ReviewCount),
+  }));
+
+  return scores;
 }

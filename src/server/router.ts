@@ -1,43 +1,49 @@
 import { Router } from "@oak/oak";
-import { CafeProductRating } from "../api/interface.ts";
-import { AddReview, GetLastReviews, GetTopProducts } from "../db/dbAccess.ts";
+import {
+  AddReview,
+  GetLastReviews,
+  GetAvgScoresByCafe,
+} from "../db/dbAccess.ts";
+import { ReviewRequest } from "../db/interface.ts";
 
 export const router = new Router();
 
-router.get("/getRates", (ctx) => {
+router.get("/getLastReviews", (ctx) => {
   const userReviews = GetLastReviews(3);
 
-  ctx.response.body = { userRates: userReviews };
+  ctx.response.body = { reviews: userReviews };
 });
 
 router.get("/getTopCoffees", (ctx) => {
-  const topCoffees = GetTopProducts("Coffee", 1);
+  const topCoffees = GetAvgScoresByCafe("Coffee", 5);
 
-  ctx.response.body = { topCoffees: topCoffees };
+  ctx.response.body = { reviews: topCoffees };
 });
 
-router.post("/rateCafeProduct", async (ctx) => {
+router.get("/getTopTostis", (ctx) => {
+  const topTostis = GetAvgScoresByCafe("Tosti", 5);
+
+  ctx.response.body = { reviews: topTostis };
+});
+
+router.post("/addReview", async (ctx) => {
   if (!ctx.request.hasBody) {
     throw new Error("There is no data specified");
   }
 
   try {
-    const ratedData = (await ctx.request.body.json()) as CafeProductRating;
+    const reviewRequest = (await ctx.request.body.json()) as ReviewRequest;
     if (
-      ratedData.cafe === "" ||
-      ratedData.product === "" ||
-      ratedData.score == 0
+      reviewRequest.cafe === "" ||
+      reviewRequest.product === "" ||
+      reviewRequest.score == 0
     ) {
-      throw new Error("Rating data is insufficient. Please check" + ratedData);
+      throw new Error(
+        "Rating data is insufficient. Please check: " + reviewRequest
+      );
     }
-    console.log(ratedData);
 
-    AddReview(
-      ratedData.user,
-      ratedData.cafe,
-      ratedData.product,
-      ratedData.score
-    );
+    AddReview(reviewRequest);
 
     ctx.response.body = { Result: "Success" };
   } catch (err) {

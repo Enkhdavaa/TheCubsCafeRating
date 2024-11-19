@@ -12,22 +12,18 @@ export default class Survey extends HTMLElement {
   }
 
   #template(): HTMLTemplateResult {
-    const rows = [
-      {
-        CafeName: "Smaakmakers",
-        Location: "Eindhoven",
-        CoffeeRating: 9,
-        TostiRating: 9,
-        VibeRating: 9,
-      },
-      {
-        CafeName: "ZwartWit",
-        Location: "VictoriaPark",
-        CoffeeRating: 9,
-        TostiRating: 9,
-        VibeRating: 9,
-      },
+    const cafes_unsorted = [
+      "Smaakmakers",
+      "ZwartWit",
+      "Bakkie 040",
+      "Jungle Cafe",
+      "Coffee Corner",
     ];
+
+    const cafes: string[] = cafes_unsorted.sort((a: string, b: string) => {
+      return a.localeCompare(b);
+    });
+
     return html` <div
       class="border border-primary rounded m-3 table-responsive"
     >
@@ -35,20 +31,18 @@ export default class Survey extends HTMLElement {
       <table class="table">
         <thead class="thread-dark">
           <tr>
-            <th scope="col">Cafe name</th>
-            <th scope="col">Coffee rating</th>
-            <th scope="col">Tosti rating</th>
-            <th scope="col">Vibe rating</th>
+            <th scope="col">Cafe</th>
+            <th scope="col">Coffee</th>
+            <th scope="col">Tosti</th>
           </tr>
         </thead>
         <tbody>
-          ${rows.map((row) => {
+          ${cafes.map((cafe) => {
             return html`
               <tr>
-                <td>${row.CafeName}</td>
-                <td>${triggerBtnForModalHtml(row.CafeName, "Coffee")}</td>
-                <td>${triggerBtnForModalHtml(row.CafeName, "Tosti")}</td>
-                <td>${triggerBtnForModalHtml(row.CafeName, "Vibe")}</td>
+                <td>${cafe}</td>
+                <td>${triggerBtnForModalHtml(cafe, "Coffee")}</td>
+                <td>${triggerBtnForModalHtml(cafe, "Tosti")}</td>
               </tr>
             `;
           })}

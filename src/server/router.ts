@@ -1,10 +1,8 @@
 import { Router } from "@oak/oak";
-import {
-  AddReview,
-  GetLastReviews,
-  GetAvgScoresByCafe,
-} from "../db/dbAccess.ts";
 import { ReviewRequest } from "../db/interface.ts";
+import { GetLastReviews } from "../db/getLastReviews.ts";
+import { GetAvgScoresByCafe } from "../db/getAvgScoresByCafe.ts";
+import { AddReview } from "../db/addReview.ts";
 
 export const router = new Router();
 

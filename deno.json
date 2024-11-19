@@ -6,7 +6,7 @@
     "vite": "npm:vite@^5.4.10"
   },
   "tasks": {
-    "dev": "deno run -A npm:vite",
+    "dev": "deno run -A npm:vite --host",
     "clean": "rm -rf ./node_modules && rm -rf ./vendor && rm -rf ./.vite && rm -rf ./deno.lock",
     "serve": "deno run --allow-all ./src/server/server.ts"
   },

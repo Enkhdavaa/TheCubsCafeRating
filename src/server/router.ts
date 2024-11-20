@@ -30,22 +30,29 @@ router.post("/api/addReview", async (ctx) => {
   }
 
   try {
-    const reviewRequest = (await ctx.request.body.json()) as ReviewRequest;
-    if (
-      reviewRequest.cafe === "" ||
-      reviewRequest.product === "" ||
-      reviewRequest.score == 0
-    ) {
+    const urlEncoded = await ctx.request.body.form();
+    const user = urlEncoded.get("user");
+    const cafe = urlEncoded.get("cafe");
+    const product = urlEncoded.get("product");
+    const score = urlEncoded.get("score");
+
+    if (user == null || cafe == null || product === null || score == null) {
       throw new Error(
-        "Rating data is insufficient. Please check: " + reviewRequest
+        "Rating data is insufficient. Please check: " + urlEncoded
       );
     }
 
-    AddReview(reviewRequest);
+    const reviewRequest: ReviewRequest = {
+      user: user,
+      cafe: cafe,
+      product: product,
+      score: Number.parseInt(score),
+    };
 
-    ctx.response.body = { Result: "Success" };
+    AddReview(reviewRequest);
+    ctx.response.redirect("/");
   } catch (err) {
-    ctx.response.body = { Result: "Failed" };
+    console.error(err);
     throw err;
   }
 });

@@ -1,5 +1,4 @@
 import { html, type HTMLTemplateResult } from "lit-html";
-import { RateCafeProduct } from "./api/addReview.ts";
 
 export function triggerBtnForModalHtml(
   cafe: string,
@@ -40,7 +39,7 @@ function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
   const scoreInputId = "score" + cafe + product;
 
   return html`
-    <form>
+    <form @submit=${sendToBackend} method="post" action="/api/addReview">
       <div class="m-3">
         <label for="${userNameInputId}" class="form-label">Name</label>
         <input
@@ -50,6 +49,7 @@ function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
           minlength="2"
           required
           aria-describedby="${userNameInputId}"
+          name="user"
         />
         <div id="${userNameInputId}" class="form-text mb-2">
           Name is only used for filtering duplicate votes!
@@ -66,37 +66,25 @@ function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
           min="1"
           max="10"
           required
+          step="1"
+          name="score"
         />
+        <!-- Fields are hidden and used for tranfering data on submit form. -->
+        <input type="hidden" name="cafe" value="${cafe}" />
+        <input type="hidden" name="product" value="${product}" />
+
         <div id="${scoreInputId}" class="form-text">
           Only allowed 1-10 in rating.
         </div>
       </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary mx-3 mb-3"
-        @click="${async () => {
-          const inputUserName: HTMLInputElement = document.getElementById(
-            userNameInputId
-          ) as HTMLInputElement;
-
-          const inputScore: HTMLInputElement = document.getElementById(
-            scoreInputId
-          ) as HTMLInputElement;
-
-          const userName = inputUserName.value;
-          const score = Number.parseInt(inputScore.value);
-
-          if (score > 0 && score < 11) {
-            await RateCafeProduct(userName, cafe, product, score);
-            globalThis.alert(
-              "We are going to see which cafe has the best product for Cubs. Thank you so much!"
-            );
-          }
-        }}"
-      >
-        Submit
-      </button>
+      <button type="submit" class="btn btn-primary mx-3 mb-3">Submit</button>
     </form>
   `;
+}
+
+function sendToBackend() {
+  globalThis.alert(
+    "We are going to see which cafe has the best product for Cubs. Thank you so much!"
+  );
 }

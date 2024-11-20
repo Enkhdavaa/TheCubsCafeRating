@@ -6,25 +6,25 @@ import { AddReview } from "../db/addReview.ts";
 
 export const router = new Router();
 
-router.get("/getLastReviews", (ctx) => {
+router.get("/api/getLastReviews", (ctx) => {
   const userReviews = GetLastReviews(3);
 
   ctx.response.body = { reviews: userReviews };
 });
 
-router.get("/getTopCoffees", (ctx) => {
+router.get("/api/getTopCoffees", (ctx) => {
   const topCoffees = GetAvgScoresByCafe("Coffee", 5);
 
   ctx.response.body = { reviews: topCoffees };
 });
 
-router.get("/getTopTostis", (ctx) => {
+router.get("/api/getTopTostis", (ctx) => {
   const topTostis = GetAvgScoresByCafe("Tosti", 5);
 
   ctx.response.body = { reviews: topTostis };
 });
 
-router.post("/addReview", async (ctx) => {
+router.post("/api/addReview", async (ctx) => {
   if (!ctx.request.hasBody) {
     throw new Error("There is no data specified");
   }

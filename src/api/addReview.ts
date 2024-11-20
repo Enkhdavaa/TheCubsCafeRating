@@ -1,5 +1,4 @@
 import { ReviewRequest } from "../db/interface.ts";
-import { baseUrlHostPort } from "./endpoints.ts";
 
 export async function RateCafeProduct(
   user: string,
@@ -15,7 +14,7 @@ export async function RateCafeProduct(
   };
 
   try {
-    const response = await fetch(new URL("/addReview", baseUrlHostPort), {
+    const response = await fetch("/api/addReview", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

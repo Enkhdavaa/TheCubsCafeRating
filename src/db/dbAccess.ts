@@ -1,1 +1,1 @@
-export const db_path = "./src/db/cafeRatings.db";
+export const db_path = "./src/db/cubsReview.db";

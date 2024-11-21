@@ -19,7 +19,12 @@ export function AddReview(request: ReviewRequest) {
   }
 
   if (score < 1 || score > 10) {
-    console.error("Score value is exceede LIMIT" + score);
+    console.error("Score value is exceede LIMIT: " + score);
+    return;
+  }
+
+  if (!Number.isInteger(score)) {
+    console.error("Score value is not Integer: " + score);
     return;
   }
 

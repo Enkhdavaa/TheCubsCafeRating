@@ -30,7 +30,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "enkhdavaaba-thecubscafe-16"
-          entrypoint: "src/server/server.ts"
+          entrypoint: "../server.ts"
           root: "src/server/static"
           
           

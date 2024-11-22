@@ -31,6 +31,6 @@ jobs:
         with:
           project: "enkhdavaaba-thecubscafe-16"
           entrypoint: "./server.ts"
-          root: "src/server"
+          root: ""
           
           

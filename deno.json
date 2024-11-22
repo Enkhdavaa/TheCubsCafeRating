@@ -9,7 +9,7 @@
   "tasks": {
     "dev": "deno run -A npm:vite --host",
     "clean": "rm -rf ./node_modules && rm -rf ./vendor && rm -rf ./.vite && rm -rf ./deno.lock",
-    "serve": "deno run --allow-all ./src/server/server.ts",
+    "serve": "deno run --allow-all ./server.ts",
     "build": "deno run -A npm:vite build"
   },
   "nodeModulesDir": "auto",

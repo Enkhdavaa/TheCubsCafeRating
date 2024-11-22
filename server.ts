@@ -31,7 +31,7 @@ app.use(async (ctx, next) => {
     }
     try {
         await ctx.send({
-            root: import.meta.dirname + "/static",
+            root: import.meta.dirname + "/dist",
             index: "index.html",
         });
         return;

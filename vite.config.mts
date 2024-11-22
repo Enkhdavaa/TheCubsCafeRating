@@ -15,7 +15,6 @@ export default defineConfig({
     assetsInlineLimit: 0,
     target: "esnext",
     emptyOutDir: true,
-    outDir: "src/server/static",
   },
   optimizeDeps: {
     exclude: ["lit-html"],

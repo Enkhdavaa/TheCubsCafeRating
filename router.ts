@@ -38,7 +38,7 @@ router.post("/api/addReview", async (ctx) => {
 
     if (user == null || cafe == null || product === null || score == null) {
       throw new Error(
-        "Rating data is insufficient. Please check: " + urlEncoded,
+        "Rating data is insufficient. Please check: " + urlEncoded
       );
     }
 

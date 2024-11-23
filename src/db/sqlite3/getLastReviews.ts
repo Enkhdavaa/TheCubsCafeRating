@@ -1,5 +1,5 @@
 import { Database } from "@db/sqlite";
-import { Review } from "./interface.ts";
+import { Review } from "../interface.ts";
 import { db_path } from "./dbAccess.ts";
 
 export function GetLastReviews(limit: number): Review[] {
@@ -23,7 +23,7 @@ export function GetLastReviews(limit: number): Review[] {
   db.close();
 
   const reviews: Review[] = rows.map((row: any) => ({
-    user: row.User,
+    username: row.Username,
     cafe: row.Cafe,
     product: row.Product,
     score: Number.parseInt(row.Score),

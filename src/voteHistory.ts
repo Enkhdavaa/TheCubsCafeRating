@@ -35,7 +35,7 @@ export default class VoteHostory extends HTMLElement {
           ${userRates.map((rate) => {
             return html`
               <tr>
-                <td>${rate.user}</td>
+                <td>${rate.username}</td>
                 <td>${rate.cafe}</td>
                 <td>${rate.product}</td>
                 <td>${rate.score}</td>

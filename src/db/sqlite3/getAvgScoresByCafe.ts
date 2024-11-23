@@ -1,5 +1,5 @@
 import { Database } from "@db/sqlite";
-import { AvarageScore } from "./interface.ts";
+import { AvarageScore } from "../interface.ts";
 import { db_path } from "./dbAccess.ts";
 
 export function GetAvgScoresByCafe(

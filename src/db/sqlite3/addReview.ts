@@ -1,9 +1,9 @@
 import { Database } from "@db/sqlite";
-import { ReviewRequest } from "./interface.ts";
+import { ReviewRequest } from "../interface.ts";
 import { db_path } from "./dbAccess.ts";
 
 export function AddReview(request: ReviewRequest) {
-  const user = request.user;
+  const user = request.username;
   const cafe = request.cafe;
   const product = request.product;
   const score = request.score;

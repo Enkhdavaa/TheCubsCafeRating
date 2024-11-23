@@ -6,14 +6,14 @@ export interface AvarageScore {
 }
 
 export interface Review {
-  user: string;
+  username: string;
   cafe: string;
   product: string;
   score: number;
 }
 
 export interface ReviewRequest {
-  user: string;
+  username: string;
   cafe: string;
   product: string;
   score: number;

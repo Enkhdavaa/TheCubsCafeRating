@@ -14,17 +14,11 @@
   },
   "nodeModulesDir": "auto",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "dom.asynciterable",
-      "deno.ns"
-    ],
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"],
     "noImplicitOverride": true,
     "strict": true,
     "useUnknownInCatchVariables": true
   },
-  "exclude": [
-    ".vite"
-  ]
+  "exclude": [".vite"],
+  "unstable": ["kv"]
 }

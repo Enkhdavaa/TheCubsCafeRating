@@ -1,6 +1,7 @@
 import { html, render, type HTMLTemplateResult } from "lit-html";
 import { AvarageScore } from "./db/interface.ts";
-import { apiGetTopTostis } from "./api/getTopTostis.ts";
+import { apiGetTopProducts } from "./api/getTopProducts.ts";
+import { Product } from "./types.ts";
 
 export default class TopTosti extends HTMLElement {
   constructor() {
@@ -9,7 +10,7 @@ export default class TopTosti extends HTMLElement {
   }
 
   #update() {
-    apiGetTopTostis()
+    apiGetTopProducts(Product.Tosti)
       .then((res) => {
         render(this.#template(res ?? []), this);
       })

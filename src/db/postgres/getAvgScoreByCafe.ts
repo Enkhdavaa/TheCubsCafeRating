@@ -1,3 +1,4 @@
+import { Product } from "../../types.ts";
 import { AvarageScore } from "../interface.ts";
 import { connection } from "./dbAccess.ts";
 
@@ -5,7 +6,7 @@ export async function GetAvgScoresByCafe(
   product: string,
   limit: number
 ): Promise<AvarageScore[]> {
-  if (product != "Coffee" && product != "Tosti" && product != "Vibe") {
+  if (!(Object.values(Product) as string[]).includes(product)) {
     console.error("Product is NOT VALID");
     return [];
   }

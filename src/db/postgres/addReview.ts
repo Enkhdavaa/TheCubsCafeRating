@@ -1,3 +1,4 @@
+import { Product } from "../../types.ts";
 import { ReviewRequest } from "../interface.ts";
 import { connection } from "./dbAccess.ts";
 
@@ -12,7 +13,7 @@ export async function AddReview(request: ReviewRequest) {
     return;
   }
 
-  if (product != "Coffee" && product != "Tosti" && product != "Vibe") {
+  if (!(Object.values(Product) as string[]).includes(product)) {
     console.error("Product is NOT VALID: " + product);
     return;
   }

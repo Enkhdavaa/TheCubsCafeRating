@@ -1,6 +1,7 @@
 import { Database } from "@db/sqlite";
 import { ReviewRequest } from "../interface.ts";
 import { db_path } from "./dbAccess.ts";
+import { Product } from "../../types.ts";
 
 export function AddReview(request: ReviewRequest) {
   const user = request.username;
@@ -13,7 +14,7 @@ export function AddReview(request: ReviewRequest) {
     return;
   }
 
-  if (product != "Coffee" && product != "Tosti" && product != "Vibe") {
+  if (!(Object.values(Product) as string[]).includes(product)) {
     console.error("Product is NOT VALID: " + product);
     return;
   }

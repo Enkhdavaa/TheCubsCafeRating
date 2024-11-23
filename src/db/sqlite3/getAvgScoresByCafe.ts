@@ -1,12 +1,13 @@
 import { Database } from "@db/sqlite";
 import { AvarageScore } from "../interface.ts";
 import { db_path } from "./dbAccess.ts";
+import { Product } from "../../types.ts";
 
 export function GetAvgScoresByCafe(
   product: string,
   limit: number
 ): AvarageScore[] {
-  if (product != "Coffee" && product != "Tosti" && product != "Vibe") {
+  if (!(Object.values(Product) as string[]).includes(product)) {
     console.error("Product is NOT VALID");
     return [];
   }

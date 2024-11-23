@@ -3,14 +3,14 @@ import { AvarageScore } from "./db/interface.ts";
 import { apiGetTopProducts } from "./api/getTopProducts.ts";
 import { Product } from "./types.ts";
 
-export default class TopCoffee extends HTMLElement {
+export default class TopPastry extends HTMLElement {
   constructor() {
     super();
     this.#update();
   }
 
   #update() {
-    apiGetTopProducts(Product.Coffee)
+    apiGetTopProducts(Product.Pastry)
       .then((res) => {
         render(this.#template(res ?? []), this);
       })
@@ -20,9 +20,9 @@ export default class TopCoffee extends HTMLElement {
       });
   }
 
-  #template(topCoffees: AvarageScore[]): HTMLTemplateResult {
+  #template(products: AvarageScore[]): HTMLTemplateResult {
     return html`<div class="border border-primary rounded m-3 table-responsive">
-      <p class="h3 ">Top coffee</p>
+      <p class="h3 ">Top pastry</p>
       <table class="table">
         <thead class="thread-dark">
           <tr>
@@ -33,7 +33,7 @@ export default class TopCoffee extends HTMLElement {
           </tr>
         </thead>
         <tbody>
-          ${topCoffees.map((cafe) => {
+          ${products.map((cafe) => {
             return html`
               <tr>
                 <td>${cafe.cafe}</td>
@@ -49,4 +49,4 @@ export default class TopCoffee extends HTMLElement {
   }
 }
 
-customElements.define("top-coffee", TopCoffee);
+customElements.define("top-pastry", TopPastry);

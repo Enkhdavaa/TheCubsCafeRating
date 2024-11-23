@@ -11,16 +11,16 @@ router.get("/api/getLastReviews", async (ctx) => {
   ctx.response.body = { reviews: userReviews };
 });
 
-router.get("/api/getTopCoffees", async (ctx) => {
-  const topCoffees = await GetAvgScoresByCafe("Coffee", 5);
+router.get("/api/getTopProducts", async (ctx) => {
+  const urlEncoded = await ctx.request.url.searchParams;
+  const productName = urlEncoded.get("product");
 
-  ctx.response.body = { reviews: topCoffees };
-});
+  if (productName === null) {
+    throw new Error("Rating data is insufficient. Please check: " + urlEncoded);
+  }
+  const products = await GetAvgScoresByCafe(productName, 5);
 
-router.get("/api/getTopTostis", async (ctx) => {
-  const topTostis = await GetAvgScoresByCafe("Tosti", 5);
-
-  ctx.response.body = { reviews: topTostis };
+  ctx.response.body = { reviews: products };
 });
 
 router.post("/api/addReview", async (ctx) => {

@@ -7,7 +7,7 @@ export async function RateCafeProduct(
   score: number
 ) {
   const rating: ReviewRequest = {
-    user: user,
+    username: user,
     cafe: cafe,
     product: product,
     score: score,

@@ -5,5 +5,8 @@ Prerequisites:
 
 Start two terminals and run the following commands:
 
-- To start back-end: deno task serve
+- To build the project: deno task build
+
+- To start back-end & front-end: deno task serve
+
 - To start front-end: deno task dev

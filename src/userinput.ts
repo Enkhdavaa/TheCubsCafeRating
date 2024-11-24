@@ -25,7 +25,7 @@ export function triggerBtnForModalHtml(
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5>Fill to rate the cafe</h5>
+            <h5>Rating ${product} from ${cafe}</h5>
           </div>
           ${getModalFormHtml(cafe, product)}
         </div>
@@ -52,12 +52,11 @@ function getModalFormHtml(cafe: string, product: string): HTMLTemplateResult {
           name="user"
         />
         <div id="${userNameInputId}" class="form-text mb-2">
-          Name is only used for filtering duplicate votes!
+          You can put any name, real or fake. Your name will be visible on rate
+          history section.
         </div>
 
-        <label for="${scoreInputId}" class="form-label mb-2"
-          >Rating ${product} from ${cafe}</label
-        >
+        <label for="${scoreInputId}" class="form-label mb-2">Score</label>
         <input
           type="number"
           class="form-control"

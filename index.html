@@ -9,6 +9,7 @@
       href="./node_modules/bootstrap/dist/css/bootstrap.css"
     />
     <link rel="stylesheet" href="./src/style.css" />
+    <link rel="prefetch" href="./public/assets/svg/svgs.svg" />
     <script
       type="module"
       src="./node_modules/bootstrap/dist/js/bootstrap.esm.js"
@@ -16,8 +17,10 @@
     <script type="module" src="/src/index.ts"></script>
   </head>
   <body>
+    <header style="background-color: #ffc107">
+      <h3 class="text-center p-4" style="color: #3295cb">THE CUBS CAFE</h3>
+    </header>
     <main class="content">
-      <rating-header></rating-header>
       <div>
         <cafe-survey></cafe-survey>
         <top-coffee></top-coffee>
@@ -26,5 +29,24 @@
         <vote-history></vote-history>
       </div>
     </main>
+    <footer class="text-center p-3" style="background-color: #ffc107">
+      <h6>The Cubs Run Club</h6>
+      <h6 class="pb-2">Eindhoven, The Netherlands</h6>
+      <div class="pb-1">
+        <a href="https://www.instagram.com/thecubs_runclub/" target="_blank">
+          <svg width="40px" viewBox="0 0 100 100">
+            <use href="public/assets/svg/svgs.svg#instagram" />
+          </svg>
+        </a>
+        <a
+          href="https://www.meetup.com/the-cubs-run-club-eindhoven/"
+          target="_blank"
+        >
+          <svg width="40px" viewbox="0 0 100 110">
+            <use href="public/assets/svg/svgs.svg#meetup-swarm" />
+          </svg>
+        </a>
+      </div>
+    </footer>
   </body>
 </html>

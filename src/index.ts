@@ -1,4 +1,3 @@
-import "./header.ts";
 import "./survey.ts";
 import "./userinput.ts";
 import "./voteHistory.ts";

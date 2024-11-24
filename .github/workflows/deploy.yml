@@ -29,8 +29,8 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "enkhdavaaba-thecubscafe-16"
-          entrypoint: "./server.ts"
+          project: "thecubscafe"
+          entrypoint: "server.ts"
           root: ""
           
           

@@ -7,7 +7,7 @@ import { AddReview } from "./src/db/postgres/addReview.ts";
 export const router = new Router();
 
 router.get("/api/getLastReviews", async (ctx) => {
-  const userReviews = await GetLastReviews(3);
+  const userReviews = await GetLastReviews(20);
   ctx.response.body = { reviews: userReviews };
 });
 

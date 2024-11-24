@@ -29,7 +29,7 @@ export default class TopPastry extends HTMLElement {
             <th scope="col">Cafe</th>
             <th scope="col">Product</th>
             <th scope="col">Score</th>
-            <th scope="col">Review Count</th>
+            <th scope="col">Based on</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@ export default class TopPastry extends HTMLElement {
                 <td>${cafe.cafe}</td>
                 <td>${cafe.product}</td>
                 <td>${cafe.score}</td>
-                <td>${cafe.count}</td>
+                <td>${cafe.count} reviews</td>
               </tr>
             `;
           })}

@@ -21,7 +21,7 @@ export default class VoteHostory extends HTMLElement {
 
   #template(userRates: Review[]): HTMLTemplateResult {
     return html`<div class="border border-primary rounded m-3 table-responsive">
-      <p class="h3 ">Vote history</p>
+      <p class="h3 ">Rate history</p>
       <table class="table">
         <thead>
           <tr>

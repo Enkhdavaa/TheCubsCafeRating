@@ -16,6 +16,13 @@ export default class Survey extends HTMLElement {
     const cafes_unsorted = [
       "Smaakmakers",
       "ZwartWit",
+      "Community Square",
+      "Otis",
+      "Bean brothers",
+      "Anne & Max",
+      "CoffeeLab (Strijp)",
+      "CoffeeLab (Center)",
+      "Lunchroom 1NUL1",
       "Bakkie 040",
       "Jungle Cafe",
       "Coffee Corner",

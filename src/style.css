@@ -1,3 +1,17 @@
 html,
 body {
 }
+
+/* If you table-responsive element from bootstrap please set the following 
+    -webkit-overflow-scrolling: auto;
+*/
+
+.main-page-table {
+  table-layout: fixed;
+  overflow-wrap: break-word;
+}
+
+.sticky {
+  position: sticky;
+  top: 0%;
+}

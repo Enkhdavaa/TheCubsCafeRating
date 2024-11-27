@@ -21,15 +21,15 @@ export default class TopPastry extends HTMLElement {
   }
 
   #template(products: AvarageScore[]): HTMLTemplateResult {
-    return html`<div class="border border-primary rounded m-3 table-responsive">
+    return html`<div class="border border-primary rounded m-3">
       <p class="h3 ">Top pastry</p>
       <table class="table">
-        <thead class="thread-dark">
+        <thead class="thread-dark sticky">
           <tr>
             <th scope="col">Cafe</th>
             <th scope="col">Product</th>
             <th scope="col">Score</th>
-            <th scope="col">Based on</th>
+            <th scope="col">Based</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@ export default class TopPastry extends HTMLElement {
                 <td>${cafe.cafe}</td>
                 <td>${cafe.product}</td>
                 <td>${cafe.score}</td>
-                <td>${cafe.count} reviews</td>
+                <td>${cafe.count} revs</td>
               </tr>
             `;
           })}

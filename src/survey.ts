@@ -19,7 +19,12 @@ export default class Survey extends HTMLElement {
       <table class="table main-page-table">
         <thead class="thread-dark sticky">
           <tr class="">
-            <th style="width: 33vw;" scope="col">Cafe</th>
+            <th style="width: 33vw;" scope="col">
+              <span>Cafe</span>
+              <span style="font-size: xx-small; font-style: italic;">
+                (clickable)</span
+              >
+            </th>
             <th style="text-align: center;" scope="col">Coffee</th>
             <th style="text-align: center;" scope="col">Tosti</th>
             <th style="text-align: center;" scope="col">Pastry</th>
@@ -29,15 +34,23 @@ export default class Survey extends HTMLElement {
           ${cafes.map((cafe) => {
             return html`
               <tr>
-                <td>${cafe}</td>
-                <td style="text-align: center;">
-                  ${triggerBtnForModalHtml(cafe, Product.Coffee)}
+                <td>
+                  <a
+                    target="_blank"
+                    href="${cafe.link}"
+                    style="text-decoration: none; color: #0d0d0d;"
+                  >
+                    ${cafe.name}
+                  </a>
                 </td>
                 <td style="text-align: center;">
-                  ${triggerBtnForModalHtml(cafe, Product.Tosti)}
+                  ${triggerBtnForModalHtml(cafe.name, Product.Coffee)}
                 </td>
                 <td style="text-align: center;">
-                  ${triggerBtnForModalHtml(cafe, Product.Pastry)}
+                  ${triggerBtnForModalHtml(cafe.name, Product.Tosti)}
+                </td>
+                <td style="text-align: center;">
+                  ${triggerBtnForModalHtml(cafe.name, Product.Pastry)}
                 </td>
               </tr>
             `;

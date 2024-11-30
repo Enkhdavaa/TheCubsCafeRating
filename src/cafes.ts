@@ -13,6 +13,10 @@ const cafes_unsorted: cafe[] = [
     name: "Community Square",
     link: "https://maps.app.goo.gl/X3Dh38P4JwuuHbco7",
   },
+{
+name: "Koffiehuisje Eindhoven",
+link: "https://maps.app.goo.gl/RZh4yPfHysMgwS9LA",
+},
   { name: "Otis", link: "https://maps.app.goo.gl/gxXvXGadxUnJRfKJ7" },
   { name: "Bean brothers", link: "https://maps.app.goo.gl/gY4cMoRn3oxF2Nvc8" },
   { name: "Anne & Max", link: "https://maps.app.goo.gl/vjnAYf61vrTyK9XJ9" },

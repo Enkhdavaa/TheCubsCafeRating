@@ -20,9 +20,9 @@ export default class VoteHostory extends HTMLElement {
   }
 
   #template(userRates: Review[]): HTMLTemplateResult {
-    return html`<div class="border border-primary rounded m-3">
-      <p class="h3 ">Rate history</p>
-      <table class="table">
+    return html`<div>
+      <span class="h-c sticky">HISTORY</span>
+      <table class="cafe-table">
         <thead>
           <tr>
             <th scope="col">User</th>
@@ -35,7 +35,7 @@ export default class VoteHostory extends HTMLElement {
           ${userRates.map((rate) => {
             return html`
               <tr>
-                <td style="max-width: 9vh; overflow-wrap: break-word;">
+                <td style="max-width: 13vh; overflow-wrap: break-word;">
                   ${rate.username}
                 </td>
                 <td>${rate.cafe}</td>

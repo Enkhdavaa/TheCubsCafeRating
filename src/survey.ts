@@ -14,11 +14,10 @@ export default class Survey extends HTMLElement {
   }
 
   #template(): HTMLTemplateResult {
-    return html` <div class="border border-primary rounded m-3">
-      <p class="h3">Rate cafes</p>
-      <table class="table main-page-table">
-        <thead class="thread-dark sticky">
-          <tr class="">
+    return html` <div class="pb-3">
+      <table class="cafe-table">
+        <thead class="sticky">
+          <tr>
             <th style="width: 33vw;" scope="col">
               <span>Cafe</span>
               <span style="font-size: xx-small; font-style: italic;">

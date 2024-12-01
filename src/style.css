@@ -6,6 +6,10 @@ body {
     -webkit-overflow-scrolling: auto;
 */
 
+:root {
+  --h-c-top: 1.4rem;
+}
+
 .main-page-table {
   table-layout: fixed;
   overflow-wrap: break-word;
@@ -14,4 +18,33 @@ body {
 .sticky {
   position: sticky;
   top: 0%;
+  background-color: white;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 1.7rem; /* This is hardcoded because it needs to add var(--h-c-top) and some padding of the table which is around 1.7 rem */
+  background-color: white;
+}
+
+.cafe-table {
+  width: 100%;
+}
+
+table > :not(caption) > * > * {
+  border-collapse: collapse;
+  font-family: sans-serif;
+  padding: 0.5rem 0.5rem;
+}
+
+th,
+td {
+  border: 1px solid rgba(53, 33, 3, 0.119);
+  padding-block: 2px;
+}
+
+.h-c {
+  font-size: var(--h-c-top);
+  display: block;
+  text-align: center;
 }

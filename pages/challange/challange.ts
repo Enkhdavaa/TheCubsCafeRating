@@ -1,44 +1,4 @@
-const challange = [
-  {
-    ch: "asasjdhf kjas dhf kasdf hklas hdflk kljah jkh df klahskdfh klash dfk askdfh kas hdfdf",
-    deadline: "",
-  },
-  {
-    ch: "as asdf alsd fkjzhxckvh ksjdh f jklhckjvh kashd fkl acjvh kasd f asdfh zkxjch v klzxh df",
-    deadline: "",
-  },
-  {
-    ch: "xz asjdhf klzxcjkvh kasjdh f kxh cv haskld fkh cv zxklch vklzjxch v kzx hcvk jhdfh akl hcvz",
-    deadline: "",
-  },
-  {
-    ch: "we asdjhf klzxc nv euiry fiozdrjfh sd fjh asxkfh asjkhj jkahj jasdfhasjdhfkash asdfrt",
-    deadline: "",
-  },
-  {
-    ch: "tyxgv lasdh flk jalkdj lkaswd jfkl jxclf jl;asd jfl; ajc;f ja;sldjf;lz jcvlksdhfrkhskdjvh kljxhkljhdf b",
-    deadline: "",
-  },
-  {
-    ch: "er5dklfja sl;kcv jklasd jfl kjxclkvj dlkfjflkrj  l;dc jvx jlej gl; xc;vbj xdjhg skldjfh klj thgx",
-    deadline: "",
-  },
-  {
-    ch: "56yhasd fkljas dfkh kdcvh kj fk jadckv hja hfjke fka hv jksdh g kljdh fg kshdclkv hsdkljfh dcgn",
-    deadline: "",
-  },
-  {
-    ch: "76khkasjxcv klerh f uhzdxcvh klsj hgkl jsklcjvh ejrh gisdjh vljkdh vb kljsh gkl jsdhfkljh jfg",
-    deadline: "",
-  },
-  {
-    ch: "ew5adcvj kc hvkl jsdflkj hsdklcjh xckljv bhklejhg klsjcvh  lksjhgvskljdfh rgsdf",
-    deadline: "",
-  },
-  { ch: "xer3r", deadline: "" },
-  { ch: "zxdfgfu7f", deadline: "" },
-  { ch: "sergts45tg", deadline: "" },
-];
+import { challange } from "./challangeText.ts";
 
 const elements = [];
 
@@ -77,18 +37,36 @@ popoverButton?.addEventListener("click", () => {
   }
 });
 
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+const todayFormatted = year + "-" + month + "-" + day;
+
 for (const [index, element] of elements.entries()) {
-  element?.addEventListener("click", () => {
-    const challangeText = challange[index].ch;
-    if (popover != null) {
-      if (popover.hidden) {
-        if (popoverText != null) {
-          popoverText.innerText = challangeText;
-          popover.hidden = false;
-        }
-      } else {
-        popover.hidden = true;
-      }
+  // Check deadline
+  const deadline = new Date(challange[index].deadline);
+  const currentDay = new Date(todayFormatted);
+
+  if (deadline < currentDay) {
+    if (element != null) {
+      element.style.backgroundColor = "red";
+      element.innerHTML = "";
     }
-  });
+  } else {
+    // Make clickable
+    element?.addEventListener("click", () => {
+      const challangeText = challange[index].ch;
+      if (popover != null) {
+        if (popover.hidden) {
+          if (popoverText != null) {
+            popoverText.innerText = challangeText;
+            popover.hidden = false;
+          }
+        } else {
+          popover.hidden = true;
+        }
+      }
+    });
+  }
 }

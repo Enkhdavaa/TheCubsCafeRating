@@ -18,7 +18,7 @@ router.get("/api/getTopProducts", async (ctx) => {
   if (productName === null) {
     throw new Error("Rating data is insufficient. Please check: " + urlEncoded);
   }
-  const products = await GetAvgScoresByCafe(productName, 5);
+  const products = await GetAvgScoresByCafe(productName, 8);
 
   ctx.response.body = { reviews: products };
 });

@@ -12,13 +12,11 @@
     "clean": "rm -rf ./node_modules && rm -rf ./vendor && rm -rf ./.vite && rm -rf ./deno.lock",
     "serve": "deno run --allow-all ./server.ts",
     "build": "deno run -A npm:vite build",
-    "check": "deno check server.ts router.ts vite.config.mts src/",
-    "migrate": "deno run -A src/db/postgres/migrate.ts"
+    "check": "deno check server.ts router.ts vite.config.mts src/"
   },
   "deploy": {
     "install": "deno install",
     "build": "deno task build",
-    "predeploy": "deno task migrate",
     "runtime": {
       "entrypoint": "./server.ts"
     }

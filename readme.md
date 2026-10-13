@@ -2,8 +2,7 @@ Prerequisites:
 
 1. Deno 2.0+
 2. PostgreSQL. Set `DATABASE_URL` to its connection string (defaults to a local database).
-
-Create the database table once: deno task migrate
+The table is created automatically on first use.
 
 Start two terminals and run the following commands:
 

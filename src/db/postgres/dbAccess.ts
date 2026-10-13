@@ -1,8 +1,9 @@
 import { Client } from "@db/postgres";
 
-const databaseUrl =
+const databaseUrl = withDatabaseName(
   Deno.env.get("DATABASE_URL") ??
-  "postgresql://enkhdavaabatlkhagva@localhost:5432/enkhdavaabatlkhagva";
+    "postgresql://enkhdavaabatlkhagva@localhost:5432/enkhdavaabatlkhagva"
+);
 
 // Logged once so the deploy logs show where the app connects (never the password).
 console.log(`Database: ${describeTarget(databaseUrl)}`);
@@ -42,6 +43,21 @@ export async function withConnection<T>(
   } finally {
     await connection.end().catch(() => {});
   }
+}
+
+// Prisma Postgres connection strings (as provided by Deno Deploy) leave out the
+// database name: ".../?sslmode=require". psql and node-postgres fill in a
+// default, but this driver refuses to connect without one, so use "postgres"
+// like Prisma's own examples do.
+function withDatabaseName(url: string): string {
+  try {
+    if (new URL(url).pathname.length > 1 || Deno.env.get("PGDATABASE")) {
+      return url;
+    }
+  } catch {
+    return url;
+  }
+  return url.replace(/\/?(?=[?#]|$)/, "/postgres");
 }
 
 function describeTarget(url: string): string {

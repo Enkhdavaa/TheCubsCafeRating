@@ -1,6 +1,6 @@
 import { Product } from "../../types.ts";
 import { AvarageScore } from "../interface.ts";
-import { connection } from "./dbAccess.ts";
+import { withConnection } from "./dbAccess.ts";
 
 export async function GetAvgScoresByCafe(
   product: string,
@@ -17,7 +17,8 @@ export async function GetAvgScoresByCafe(
   }
 
   try {
-    const result = await connection.queryObject`
+    const result = await withConnection(
+      (connection) => connection.queryObject`
       SELECT Cafe, ROUND(AVG(Score)::numeric, 1) AS AvarageScore, COUNT(*) AS ReviewCount
       FROM CafeRating
       WHERE Product = ${product}
@@ -25,7 +26,8 @@ export async function GetAvgScoresByCafe(
       ORDER BY AvarageScore DESC
       LIMIT ${limit}
       ;
-      `;
+      `
+    );
 
     const rows = result.rows;
     const scores: AvarageScore[] = rows.map((row: any) => ({
@@ -39,7 +41,5 @@ export async function GetAvgScoresByCafe(
   } catch (err) {
     console.error(err);
     return [];
-  } finally {
-    connection.release();
   }
 }

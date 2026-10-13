@@ -1,5 +1,5 @@
 import { Review } from "../interface.ts";
-import { connection } from "./dbAccess.ts";
+import { withConnection } from "./dbAccess.ts";
 
 export async function GetLastReviews(limit: number): Promise<Review[]> {
   if (limit == 0) {
@@ -8,13 +8,15 @@ export async function GetLastReviews(limit: number): Promise<Review[]> {
   }
 
   try {
-    const result = await connection.queryObject`
+    const result = await withConnection(
+      (connection) => connection.queryObject`
         SELECT username, cafe, product, score 
         FROM CafeRating
         ORDER BY id DESC
         LIMIT ${limit}
         ;
-    `;
+    `
+    );
 
     const rows = result.rows;
     const reviews: Review[] = rows.map((row: any) => ({
@@ -28,7 +30,5 @@ export async function GetLastReviews(limit: number): Promise<Review[]> {
   } catch (err) {
     console.error(err);
     return [];
-  } finally {
-    connection.release();
   }
 }

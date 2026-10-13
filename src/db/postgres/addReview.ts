@@ -1,6 +1,6 @@
 import { Product } from "../../types.ts";
 import { ReviewRequest } from "../interface.ts";
-import { connection } from "./dbAccess.ts";
+import { withConnection } from "./dbAccess.ts";
 
 export async function AddReview(request: ReviewRequest) {
   const username = request.username;
@@ -28,12 +28,12 @@ export async function AddReview(request: ReviewRequest) {
     return;
   }
   try {
-    await connection.queryObject`
+    await withConnection(
+      (connection) => connection.queryObject`
         INSERT INTO CafeRating (Username, Cafe, Product, Score) VALUES (${username}, ${cafe}, ${product}, ${score});
-      `;
+      `
+    );
   } catch (err) {
     console.error(err);
-  } finally {
-    connection.release();
   }
 }
